@@ -1,0 +1,17 @@
+node_modules/
+
+
+download/*
+!download/.gitkeep
+
+upload/*
+!upload/.gitkeep
+
+upload/*
+!upload/.gitkeep
+
+public/image/blured/*
+!public/image/blured/.gitkeep
+
+public/image/original/*
+!public/image/original/.gitkeep

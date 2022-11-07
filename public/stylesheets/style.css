@@ -1,16 +1,59 @@
 body {
   padding: 100px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #00B7FF;
+  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: lightgray;
 }
 
-a {
-  color: #00B7FF;
-}
 
-#block
+
+.show
 {
-  width: 50px;
-  height: 50px;
+  display: flex;
+  flex-direction: row;
+
+}
+
+
+.file-show
+{
+  width: 600px;
+  height: 400px;
+  overflow: auto;
+  display: flex;
+  background-color: darkblue;
+  border-radius: 2%;
+  border-color: black;
+  position: relative;
+}
+
+.file-show-container 
+{
+  margin: 5%;
+  margin-bottom: 100px;
+}
+
+.seperator
+{
+  height: 100%;
   background-color: pink;
+  width: 100px;
+}
+
+.image
+{
+  position: absolute;
+}
+
+.highlight
+{
+  padding: 0;
+  margin: 0;
+  background-color: pink;
+  position: absolute;
+  opacity: 50%;
+}
+
+.highlight:hover {
+  background-color: yellow;
+  opacity: 50%;
 }
