@@ -1,11 +1,10 @@
 node_modules/
 
 
+config
+
 download/*
 !download/.gitkeep
-
-upload/*
-!upload/.gitkeep
 
 upload/*
 !upload/.gitkeep

@@ -17,11 +17,6 @@ downloadPath = sys.argv[4]
 
 
 
-
-
-
-
-
 context = {
     'title': 'TranX',
     'filePath': filePath

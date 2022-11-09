@@ -17,9 +17,9 @@ block content
       #left.file-show 
         .file-show-container 
           img.image(src=originPath, alt="")
-          .highlight 
+          #left-highlight.highlight 
             style(type="text/css").
-              .highlight {
+              #left-highlight {
                 margin-left: 0px;
                 margin-top: 0px;
                 width: 100px;
@@ -30,7 +30,17 @@ block content
       .seperator
 
       #right.file-show
-        img(src="/image/blured/bluredtext.png", alt="image").image
+        .file-show-container
+          img(src="/image/blured/bluredtext.png", alt="image").image
+          #right-highlight.highlight 
+            style(type="text/css").
+              #right-highlight {
+                margin-left: 0px;
+                margin-top: 0px;
+                width: 100px;
+                height: 100px;
+              }
+
     .download 
       form(action='/download/' + fileName)
         input(type="submit" value="download")
@@ -64,6 +74,14 @@ block content
       $('#' + master + ', #' + slave).scroll(sync);
     });
 
+    $(".highlight").hover(function() {
+      $("#left-highlight").css("opacity","50%");
+      $("#right-highlight").css("opacity","50%");
+    },
+    function() {
+      $("#left-highlight").css("opacity","0%");
+      $("#right-highlight").css("opacity","0%");
+    });
 
 
 
