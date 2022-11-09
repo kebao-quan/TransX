@@ -37,14 +37,10 @@ exports.postUpload = (req, res, next) => {
         if (err) 
         {
             console.log(err.message);
+            next(err);
             throw err;
         }
-        // results is an array consisting of messages collected during execution
-        //req.context = JSON.parse(results[0]);
-
-        //req.context.originPath = path.join('image', 'original', req.fileName);
-        
-
+ 
         console.log(req.session.context)
         req.session.context = JSON.parse(results[0]);
         req.session.context.originPath = '/image/original/' + req.fileName;
