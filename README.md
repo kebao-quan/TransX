@@ -9,6 +9,7 @@ PDF/Image translator
 git clone git@github.com:Ding-Kyoma/TransX.git
 pip install -r requirements.txt
 npm install
+npm start
 ```
 
 > for google translate API, see more https://cloud.google.com/translate/docs/setup
