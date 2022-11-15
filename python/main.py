@@ -1,7 +1,20 @@
-from image_ocr.ocr import detect_text
+from ocr import detect_text
 from translate_func import deepl_translate as net_translate
 import cv2
 import matplotlib.pyplot as plt
+import sys
+import json
+import argparse
+
+
+
+#TODO:
+#Generate blured image at blurPath
+#Generate download file at downloadPath
+#Add render property to context
+
+
+
 
 
 def decided_blur_strength():
@@ -24,11 +37,11 @@ def medianBlur(path, position):
     return img
 
 
-def main():
-    image_path = r"/Users/kyoma/project/TransX/image_ocr/image4.png"
+def main(args):
+    # image_path = r"/Users/kyoma/project/TransX/image_ocr/image4.png"
 
     # org text: text[0], position: text[1]
-    text = detect_text(image_path)
+    text = detect_text(args.imagePath)
 
 
     # trains text 
@@ -37,12 +50,30 @@ def main():
 
 
     # pic without word
-    img = medianBlur(image_path, text[1])
-    # plt.imsave("./test.png",img)
+    img_blur = medianBlur(args.imagePath, text[1])
+    plt.imsave(args.blurPath,img_blur)
 
-    # fount size 
+    # fount size TODO
 
+    # pic with word TODO
+
+
+
+    context = {
+        'title': 'TranX',
+        'filePath': filePath
+    }
+    contextJson = json.dumps(context)
+    print(contextJson)
 
 
 if __name__ == '__main__':
-    main()
+
+    parser = argparse.ArgumentParser()
+    args = parser.parse_args()
+    args.filePath = sys.argv[0]
+    args.rootDir = sys.argv[1]
+    args.imagePath = sys.argv[2]
+    args.blurPath = sys.argv[3]
+    args.downloadPath = sys.argv[4]
+    main(args)

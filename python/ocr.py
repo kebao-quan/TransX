@@ -1,11 +1,13 @@
+import os
+import io
+from google.cloud import vision
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "./config/windy-nova-364604-7a2df3513239.json"
+
+
 def detect_text(path):
     """Detects text in the file."""
     
-    import os
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"/Users/kyoma/project/TransX/config/windy-nova-364604-7a2df3513239.json"
-
-    from google.cloud import vision
-    import io
     client = vision.ImageAnnotatorClient()
 
     with io.open(path, 'rb') as image_file:
@@ -24,6 +26,8 @@ def detect_text(path):
     ret.append(vertices)
     
     return ret
+
+
     for text in texts:
         print('\n"{}"'.format(text.description))
 

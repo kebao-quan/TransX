@@ -1,7 +1,7 @@
 let {PythonShell} = require('python-shell')
 const rootDir = require('../util/path');
 const path = require('path');
-var PythonPath = path.join(rootDir, 'python', 'script.py')
+var PythonPath = path.join(rootDir, 'python', 'main.py')
 const fs = require('fs');
 
 exports.postUpload = (req, res, next) => {
