@@ -45,7 +45,7 @@ def main(args):
     # image_path = r"/Users/kyoma/project/TransX/image_ocr/image4.png"
 
     # org text: text[0], position: text[1]
-    text = detect_text(args.imagePath)
+    text = detect_text(args.imagePath,args)
 
 
     # trains text 

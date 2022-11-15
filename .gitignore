@@ -14,3 +14,5 @@ public/image/blured/*
 
 public/image/original/*
 !public/image/original/.gitkeep
+
+.vscode
