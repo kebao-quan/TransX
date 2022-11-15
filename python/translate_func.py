@@ -9,7 +9,7 @@ File:     translate_func.py
 import deepl
 import six
 from google.cloud import translate_v2 as translate
-# export GOOGLE_APPLICATION_CREDENTIALS="/Users/kyoma/transx-364516-6f75b84dc8b5.json"
+# export GOOGLE_APPLICATION_CREDENTIALS="./config/transx-364516-6f75b84dc8b5.json"
 
 
 def deepl_translate(target, content):

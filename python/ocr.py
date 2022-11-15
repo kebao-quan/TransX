@@ -20,6 +20,7 @@ def detect_text(path):
     
     ret = []
     text = texts[0]
+    print(text)
     vertices = ([(vertex.x, vertex.y)
                     for vertex in text.bounding_poly.vertices])
     ret.append(text.description)

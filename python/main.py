@@ -7,16 +7,20 @@ import json
 import argparse
 
 
+class Textbox(object):
+    def __init__(self, position, text_org=None, text_trans=None):
+        x1, x2 = position[0][1], position[2][1]
+        y1, y2 = position[0][0], position[1][0]
 
-#TODO:
-#Generate blured image at blurPath
-#Generate download file at downloadPath
-#Add render property to context
+        self.margin_left = min(x1, x2)
+        self.margin_top = min(y1, y2)
+        self.width = abs(x1-x2)
+        self.height = abs(y1-y2)
+        self.text_org = text_org
+        self.text_trans = text_trans
 
 
-
-
-
+#TODO
 def decided_blur_strength():
     return 51
 
@@ -53,27 +57,28 @@ def main(args):
     img_blur = medianBlur(args.imagePath, text[1])
     plt.imsave(args.blurPath,img_blur)
 
+    tb = Textbox(text[1],text[0],trans_text)
+
     # fount size TODO
 
     # pic with word TODO
 
-
-
-    context = {
-        'title': 'TranX',
-        'filePath': filePath
-    }
-    contextJson = json.dumps(context)
-    print(contextJson)
+    jsonStr = json.dumps(tb.__dict__)
+    print(jsonStr)
 
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
+    parser.add_argument('rootDir', type=str, help='root dir')
+    parser.add_argument('imagePath', type=str, help='orginal image')
+    parser.add_argument('blurPath', type=str, help='image without any word')
+    parser.add_argument('downloadPath', type=str, help='image with translated word')
     args = parser.parse_args()
-    args.filePath = sys.argv[0]
-    args.rootDir = sys.argv[1]
-    args.imagePath = sys.argv[2]
-    args.blurPath = sys.argv[3]
-    args.downloadPath = sys.argv[4]
+    # args.filePath = sys.argv[0]
+    # args.rootDir = sys.argv[1]
+    # args.imagePath = sys.argv[2]
+    # args.blurPath = sys.argv[3]
+    # args.downloadPath = sys.argv[4]
+    # print(args)
     main(args)
