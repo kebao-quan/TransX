@@ -48,10 +48,10 @@ def medianBlur(img, position):
     if y1 - red >= 0:
         y1 = y1 - red
 
-    if x2 + red <= img.shape[0]:
+    if x2 + red < img.shape[0]:
         x2 = x2 + red
 
-    if y2 + red <= img.shape[1]:
+    if y2 + red < img.shape[1]:
         y2 = y2 + red
 
     img_tmp = img[x1:x2,y1:y2,:]
