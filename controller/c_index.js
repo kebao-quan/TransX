@@ -14,7 +14,6 @@ exports.render = (req, res, next) => {
     req.session.destroy();
     if (context === undefined)
     {
-        console.log("Rendering default context");
         context = defaultContext;
     }
     res.render('index', context);

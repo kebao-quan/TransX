@@ -31,9 +31,9 @@ block content
 
       #right.file-show
         .file-show-container
-          img(src="/image/blured/bluredtext.png", alt="").image
-          each paragraph in paragraphs 
-            .parag(style="margin-left: " + paragraph.left + "px; margin-top: " + paragraph.top + "px; width: " + paragraph.width + "px;") #{paragraph.text}
+          img(src=blurPath, alt="").image
+          //- each paragraph in paragraphs 
+          //-   .parag(style="margin-left: " + paragraph.left + "px; margin-top: " + paragraph.top + "px; width: " + paragraph.width + "px;") #{paragraph.text}
           #right-highlight.highlight 
             style(type="text/css").
               #right-highlight {
