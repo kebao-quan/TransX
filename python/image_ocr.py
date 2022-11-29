@@ -2,7 +2,7 @@ def detect_text(path):
     """Detects text in the file."""
     
     import os
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"/mnt/c/Users/kquan/Development/TransX/python/config/windy-nova-364604-7a2df3513239.json"
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "./config/windy-nova-364604-7a2df3513239.json"
 
     from google.cloud import vision
     import io
@@ -13,23 +13,24 @@ def detect_text(path):
 
     image = vision.Image(content=content)
 
-    response = client.text_detection(image=image)
-    texts = response.text_annotations
-    print('Texts:')
+    response = client.document_text_detection(image=image)
+    print(response)
+    # texts = response.text_annotations
+    # print('Texts:')
 
-    for text in texts:
-        print('\n"{}"'.format(text.description))
+    # for text in texts:
+    #     print('\n"{}"'.format(text.description))
 
-        vertices = (['({},{})'.format(vertex.x, vertex.y)
-                    for vertex in text.bounding_poly.vertices])
+    #     vertices = (['({},{})'.format(vertex.x, vertex.y)
+    #                 for vertex in text.bounding_poly.vertices])
 
-        print('bounds: {}'.format(','.join(vertices)))
+    #     print('bounds: {}'.format(','.join(vertices)))
 
-    if response.error.message:
-        raise Exception(
-            '{}\nFor more info on error messages, check: '
-            'https://cloud.google.com/apis/design/errors'.format(
-                response.error.message))
+    # if response.error.message:
+    #     raise Exception(
+    #         '{}\nFor more info on error messages, check: '
+    #         'https://cloud.google.com/apis/design/errors'.format(
+    #             response.error.message))
         
-image = r"/mnt/c/Users/kquan/OneDrive/Pictures/Screenshots/Screenshot_20221115_060614.png"
+image = "/Users/kyoma/Desktop/WechatIMG184.png"
 detect_text(image)
