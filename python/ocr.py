@@ -2,11 +2,6 @@ import os
 import io
 from google.cloud import vision
 
-def get_box(data):
-    vertices = ([(vertex.x, vertex.y) for vertex in data.vertices])
-    return vertices
-
-
 def detect_text(path,args):
     """Detects text in the file."""
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.join(args.rootDir, "python","config","windy-nova-364604-7a2df3513239.json")
@@ -51,9 +46,8 @@ def detect_text(path,args):
 
     blocks = response.full_text_annotation.pages[0].blocks
     for block in blocks:
-
+        ret = []
         for paragraph in block.paragraphs:
-            ret = []
             text = ""
             # get test
             for word in paragraph.words:
@@ -64,11 +58,12 @@ def detect_text(path,args):
                     # print(symbol.text, end=end)
                     text += symbol.text + end
 
-            ret.append(text)
             # get box
-            vertices = get_box(paragraph.bounding_box)
-            ret.append(vertices)
+            vertices = ([(vertex.x, vertex.y) for vertex in paragraph.bounding_box.vertices])
 
+            ret.append(text)
+            ret.append(vertices)
+            
         rets.append(ret)
 
     return rets
