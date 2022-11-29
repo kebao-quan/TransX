@@ -1,7 +1,6 @@
 node_modules/
 
-
-config
+python/config
 
 download/*
 !download/.gitkeep
@@ -16,3 +15,5 @@ public/image/original/*
 !public/image/original/.gitkeep
 
 .vscode
+
+python/__pycache__

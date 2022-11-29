@@ -3,7 +3,10 @@ const path = require('path');
 const rootDir = require('../util/path');
 
 const defaultContext = {
-    title: "TranX1"
+    title: "TranX1",
+    paragraphs: [{text: "aaaaaaaaaa", left: 20, top: 30}    ,
+                 {text: "bbbbbbbbbb", left: 30, top: 40},
+                 {text: "cccccccccc", left: 100, top: 100}]
 }
 
 exports.render = (req, res, next) => {
@@ -11,6 +14,7 @@ exports.render = (req, res, next) => {
     req.session.destroy();
     if (context === undefined)
     {
+        console.log("Rendering default context");
         context = defaultContext;
     }
     res.render('index', context);

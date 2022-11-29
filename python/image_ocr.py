@@ -2,7 +2,7 @@ def detect_text(path):
     """Detects text in the file."""
     
     import os
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"/mnt/c/Users/kquan/Development/TransX/python/config/windy-nova-364604-7a2df3513239.json"
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"C:\Users\kquan\Development\TransX\config\windy-nova-364604-7a2df3513239.json"
 
     from google.cloud import vision
     import io
@@ -31,5 +31,5 @@ def detect_text(path):
             'https://cloud.google.com/apis/design/errors'.format(
                 response.error.message))
         
-image = r"/mnt/c/Users/kquan/OneDrive/Pictures/Screenshots/Screenshot_20221115_060614.png"
+image = r"C:\Users\kquan\Development\TransX\python\image.png"
 detect_text(image)

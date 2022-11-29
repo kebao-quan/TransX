@@ -45,8 +45,10 @@ exports.postUpload = (req, res, next) => {
         console.log(req.session.context)
         req.session.context = JSON.parse(results[0]);
         req.session.context.originPath = '/image/original/' + req.fileName;
+        req.session.context.blurPath = '/image/blured/' + req.fileName;
         req.session.context.downloadPath = downloadPath;
         req.session.context.fileName = req.fileName;
+
         console.log(req.session.context);
         res.redirect('/');
     });

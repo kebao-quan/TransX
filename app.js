@@ -25,7 +25,32 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({secret: 'mySecret', resave: false, saveUninitialized: false}));
+app.use(
+  session({
+    secret: 'mySecret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 60000
+    }
+  })
+);
+
+// Get function in which send session as routes.
+app.get('/session', function (req, res, next) {
+  if (req.session.views) {
+// Increment the number of views.
+    req.session.views++
+// Session will expires after 1 min
+// of in activity
+    res.write('<p> Session expires after 1 min of in activity: ' + (req.session.cookie.expires) + '</p>')
+    res.end()
+  } else {
+    req.session.views = 1
+    res.end(' New session is started')
+  }
+})
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
