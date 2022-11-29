@@ -46,8 +46,8 @@ def detect_text(path,args):
 
     blocks = response.full_text_annotation.pages[0].blocks
     for block in blocks:
-        ret = []
         for paragraph in block.paragraphs:
+
             text = ""
             # get test
             for word in paragraph.words:
@@ -60,11 +60,7 @@ def detect_text(path,args):
 
             # get box
             vertices = ([(vertex.x, vertex.y) for vertex in paragraph.bounding_box.vertices])
-
-            ret.append(text)
-            ret.append(vertices)
-            
-        rets.append(ret)
+            rets.append([text, vertices])
 
     return rets
         

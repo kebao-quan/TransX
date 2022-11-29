@@ -40,6 +40,20 @@ def decided_blur_strength():
 def medianBlur(img, position):
     x1, x2 = position[0][1], position[2][1]
     y1, y2 = position[0][0], position[1][0]
+
+    red = 3
+    if x1 - red >= 0:
+        x1 = x1 - red
+
+    if y1 - red >= 0:
+        y1 = y1 - red
+
+    if x2 + red <= img.shape[0]:
+        x2 = x2 + red
+
+    if y2 + red <= img.shape[1]:
+        y2 = y2 + red
+
     img_tmp = img[x1:x2,y1:y2,:]
     # plt.imsave("./test_tmp.png",img_tmp)
     img_tmp = cv2.medianBlur(img_tmp, decided_blur_strength())
