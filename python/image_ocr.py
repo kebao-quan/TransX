@@ -13,23 +13,24 @@ def detect_text(path):
 
     image = vision.Image(content=content)
 
-    response = client.text_detection(image=image)
-    texts = response.text_annotations
-    print('Texts:')
+    response = client.document_text_detection(image=image)
+    print(response)
+    # texts = response.text_annotations
+    # print('Texts:')
 
-    for text in texts:
-        print('\n"{}"'.format(text.description))
+    # for text in texts:
+    #     print('\n"{}"'.format(text.description))
 
-        vertices = (['({},{})'.format(vertex.x, vertex.y)
-                    for vertex in text.bounding_poly.vertices])
+    #     vertices = (['({},{})'.format(vertex.x, vertex.y)
+    #                 for vertex in text.bounding_poly.vertices])
 
-        print('bounds: {}'.format(','.join(vertices)))
+    #     print('bounds: {}'.format(','.join(vertices)))
 
-    if response.error.message:
-        raise Exception(
-            '{}\nFor more info on error messages, check: '
-            'https://cloud.google.com/apis/design/errors'.format(
-                response.error.message))
+    # if response.error.message:
+    #     raise Exception(
+    #         '{}\nFor more info on error messages, check: '
+    #         'https://cloud.google.com/apis/design/errors'.format(
+    #             response.error.message))
         
 image = r"C:\Users\kquan\Development\TransX\python\image.png"
 detect_text(image)

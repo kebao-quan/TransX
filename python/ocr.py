@@ -2,7 +2,9 @@ import os
 import io
 from google.cloud import vision
 
-
+def get_box(data):
+    vertices = ([(vertex.x, vertex.y) for vertex in data.vertices])
+    return vertices
 
 
 def detect_text(path,args):
@@ -16,33 +18,60 @@ def detect_text(path,args):
     image = vision.Image(content=content)
 
     response = client.text_detection(image=image)
-    texts = response.text_annotations
+    # texts = response.text_annotations
     
-    ret = []
-    text = texts[0]
+    # text = texts[0]
     #print(text)
-    vertices = ([(vertex.x, vertex.y)
-                    for vertex in text.bounding_poly.vertices])
-    ret.append(text.description)
-    ret.append(vertices)
+
+    # ret = []
+    # vertices = ([(vertex.x, vertex.y)
+    #                 for vertex in text.bounding_poly.vertices])
+    # ret.append(text.description)
+    # ret.append(vertices)
     
-    return ret
+    # return ret
+
+    # ret = []
+
+    # for text in texts[1:]:
+    #     vertices = ([(vertex.x, vertex.y)
+    #                     for vertex in text.bounding_poly.vertices])
+    #     ret.append((text.description,vertices))
+
+    # if response.error.message:
+    #     raise Exception(
+    #         '{}\nFor more info on error messages, check: '
+    #         'https://cloud.google.com/apis/design/errors'.format(
+    #             response.error.message))
+
+    # return ret
 
 
-    for text in texts:
-        print('\n"{}"'.format(text.description))
+    rets = []
 
-        vertices = (['({},{})'.format(vertex.x, vertex.y)
-                    for vertex in text.bounding_poly.vertices])
+    blocks = response.full_text_annotation.pages[0].blocks
+    for block in blocks:
 
-        print('bounds: {}'.format(','.join(vertices)))
-        
+        for paragraph in block.paragraphs:
+            ret = []
+            text = ""
+            # get test
+            for word in paragraph.words:
+                for symbol in word.symbols:
+                    end = ""
+                    if str(symbol.property.detected_break.type_)=="BreakType.SPACE":
+                        end = " "
+                    # print(symbol.text, end=end)
+                    text += symbol.text + end
 
-    if response.error.message:
-        raise Exception(
-            '{}\nFor more info on error messages, check: '
-            'https://cloud.google.com/apis/design/errors'.format(
-                response.error.message))
+            ret.append(text)
+            # get box
+            vertices = get_box(paragraph.bounding_box)
+            ret.append(vertices)
+
+        rets.append(ret)
+
+    return rets
         
 # image = r"C:\TranX\image_ocr\image4.png"
 

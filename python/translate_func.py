@@ -15,7 +15,10 @@ from google.cloud import translate_v2 as translate
 def deepl_translate(target, content):
     # https://pypi.org/project/deepl
 
-    auth_key = "b9eb9e4b-f53a-a5ab-09c0-f02e15950f0a:fx"
+    # auth_key = "b9eb9e4b-f53a-a5ab-09c0-f02e15950f0a:fx" # yiding wang
+    auth_key = "e6e1975c-b43e-fc5e-86fc-aecbc9cd4dd3:fx" # yifan shi
+    # auth_key = "de9423d6-7775-029e-6826-ea6a64f4af89:fx" # yezhe xu (error)
+
     translator = deepl.Translator(auth_key)
 
     result = translator.translate_text(content, target_lang=target)

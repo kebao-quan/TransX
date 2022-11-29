@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from ocr import detect_text
 from translate_func import deepl_translate as net_translate
 import cv2
@@ -19,53 +20,61 @@ class Textbox(object):
         self.text_org = text_org
         self.text_trans = text_trans
 
+def create_dict(tb_list):
+    block_dir = {}
+    for i in range(len(tb_list)):
+        block_dir[f"block_{i}"] = tb_list[i].__dict__
+
+    data_dir = {}
+    data_dir["blocks"] = block_dir
+    data_dir["path"] = "you_path"
+
+    return data_dir
+
 
 #TODO
 def decided_blur_strength():
     return 51
 
 
-def medianBlur(path, position):
-
+def medianBlur(img, position):
     x1, x2 = position[0][1], position[2][1]
     y1, y2 = position[0][0], position[1][0]
-
-    img = cv2.imread(path)
     img_tmp = img[x1:x2,y1:y2,:]
     # plt.imsave("./test_tmp.png",img_tmp)
-
     img_tmp = cv2.medianBlur(img_tmp, decided_blur_strength())
-
     img[x1:x2,y1:y2,:] = img_tmp
-
     return img
 
 
 def main(args):
-    # image_path = r"/Users/kyoma/project/TransX/image_ocr/image4.png"
+    texts = detect_text(args.imagePath,args)
+    img_blur = cv2.imread(args.imagePath)
+    tb_list = []
 
-    # org text: text[0], position: text[1]
-    text = detect_text(args.imagePath,args)
+    for text in texts:
+        # trains text 
+        target = "ZH"
+        trans_text = net_translate(target, text[0])
 
+        # pic without word        
+        img_blur = medianBlur(img_blur, text[1])
 
-    # trains text 
-    target = "ZH"
-    trans_text = net_translate(target, text[0])
+        # fount size TODO
 
+        # pic with word TODO
 
-    # pic without word
-    img_blur = medianBlur(args.imagePath, text[1])
-    plt.imsave(args.blurPath,img_blur)
+        tb = Textbox(text[1],text[0],trans_text)
+        # jsonStr = json.dumps(tb.__dict__)
+        # print(jsonStr)
 
-    tb = Textbox(text[1],text[0],trans_text)
+        tb_list.append(tb)
 
-    # fount size TODO
-
-    # pic with word TODO
-
-    jsonStr = json.dumps(tb.__dict__)
+    data = create_dict(tb_list)
+    jsonStr = json.dumps(data)
     print(jsonStr)
 
+    plt.imsave(args.blurPath,img_blur)
 
 if __name__ == '__main__':
 
@@ -75,10 +84,4 @@ if __name__ == '__main__':
     parser.add_argument('blurPath', type=str, help='image without any word')
     parser.add_argument('downloadPath', type=str, help='image with translated word')
     args = parser.parse_args()
-    # args.filePath = sys.argv[0]
-    # args.rootDir = sys.argv[1]
-    # args.imagePath = sys.argv[2]
-    # args.blurPath = sys.argv[3]
-    # args.downloadPath = sys.argv[4]
-    # print(args)
     main(args)
