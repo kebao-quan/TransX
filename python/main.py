@@ -45,7 +45,7 @@ def medianBlur(img, position):
     x1, x2 = position[0][1], position[2][1]
     y1, y2 = position[0][0], position[1][0]
 
-    red = 3
+    red = 5
     if x1 - red >= 0:
         x1 = x1 - red
 
@@ -79,7 +79,7 @@ def main(args):
 
         # pic with word TODO
 
-        
+
         tb = Textbox(position=text[1],text_org=text[0],text_trans=trans_text, font_size=text[2])
         tb_list.append(tb)
 
