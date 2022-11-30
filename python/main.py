@@ -3,6 +3,7 @@ from ocr import detect_text
 from translate_func import deepl_translate as net_translate
 import cv2
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 import sys
 import json
 import argparse
@@ -34,7 +35,7 @@ def create_dict(tb_list):
 
 #TODO
 def decided_blur_strength():
-    return 51
+    return 53
 
 
 def medianBlur(img, position):
@@ -63,7 +64,8 @@ def medianBlur(img, position):
 
 def main(args):
     texts = detect_text(args.imagePath,args)
-    img_blur = cv2.imread(args.imagePath)
+    img_blur = mpimg.imread(args.imagePath)
+    img_blur = img_blur.copy()
     tb_list = []
 
     for text in texts:
@@ -73,7 +75,7 @@ def main(args):
 
         # pic without word        
         img_blur = medianBlur(img_blur, text[1])
-
+        # img_blur = img_blur.transpose(0,2,1)
         # fount size TODO
 
         # pic with word TODO
@@ -87,7 +89,6 @@ def main(args):
     data = create_dict(tb_list)
     jsonStr = json.dumps(data)
     print(jsonStr)
-
     plt.imsave(args.blurPath,img_blur)
 
 if __name__ == '__main__':
