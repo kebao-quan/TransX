@@ -1,5 +1,6 @@
 import os
 import io
+import numpy as np
 from google.cloud import vision
 
 def detect_text(path,args):
@@ -47,7 +48,7 @@ def detect_text(path,args):
     blocks = response.full_text_annotation.pages[0].blocks
     for block in blocks:
         for paragraph in block.paragraphs:
-
+            font_size_list = []
             text = ""
             # get test
             for word in paragraph.words:
@@ -57,10 +58,11 @@ def detect_text(path,args):
                         end = " "
                     # print(symbol.text, end=end)
                     text += symbol.text + end
-
+                    font_size_list.append(symbol.bounding_box.vertices[1].x - symbol.bounding_box.vertices[0].x)
             # get box
             vertices = ([(vertex.x, vertex.y) for vertex in paragraph.bounding_box.vertices])
-            rets.append([text, vertices])
+            font_size = np.median(np.array(font_size_list))
+            rets.append([text, vertices, font_size])
 
     return rets
         
