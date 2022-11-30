@@ -31,7 +31,13 @@ function extractParagraph(context)
                 text_org = value;
                 break;
             case "text_trans":
-                texst_trans = value;
+                text_trans = value;
+                break;
+            case "font_size":
+                style = style.concat("font-size: ", value, "px; ");
+                break;
+            case "line_space":
+                style = style.concat("line-height: ", value, "; ");
                 break;
             default:
                 break;
@@ -40,7 +46,7 @@ function extractParagraph(context)
     let tmp = {
         style: style,
         text_org: text_org,
-        text_trans: texst_trans
+        text_trans: text_trans
     }
     paragraphs.push(tmp)
   }
