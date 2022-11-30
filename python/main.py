@@ -75,15 +75,12 @@ def main(args):
 
         # pic without word        
         img_blur = medianBlur(img_blur, text[1])
-        # img_blur = img_blur.transpose(0,2,1)
+
         # fount size TODO
 
         # pic with word TODO
 
         tb = Textbox(text[1],text[0],trans_text)
-        # jsonStr = json.dumps(tb.__dict__)
-        # print(jsonStr)
-
         tb_list.append(tb)
 
     data = create_dict(tb_list)
