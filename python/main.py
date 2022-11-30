@@ -14,8 +14,8 @@ class Textbox(object):
         x1, x2 = position[0][1], position[2][1]
         y1, y2 = position[0][0], position[1][0]
 
-        self.margin_left = min(x1, x2)
-        self.margin_top = min(y1, y2)
+        self.margin_left = min(y1, y2) 
+        self.margin_top = min(x1, x2)
         self.width = abs(y1-y2)
         self.height = abs(x1-x2)
         self.text_org = text_org
