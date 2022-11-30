@@ -37,7 +37,7 @@ def create_dict(tb_list):
 
 
 #TODO
-def decided_blur_strength():
+def blur_strength():
     return 53
 
 
@@ -59,7 +59,7 @@ def medianBlur(img, position):
         y2 = y2 + red
 
     img_tmp = img[x1:x2,y1:y2,:]
-    img_tmp = cv2.medianBlur(img_tmp, decided_blur_strength())
+    img_tmp = cv2.medianBlur(img_tmp, blur_strength())
     img[x1:x2,y1:y2,:] = img_tmp
     return img
 
@@ -77,10 +77,15 @@ def main(args):
         # pic without word        
         img_blur = medianBlur(img_blur, text[1])
 
+        # font_size = 
+        font_size = text[2]
+        font_size = font_size * 1.5
+
         # pic with word TODO
 
 
-        tb = Textbox(position=text[1],text_org=text[0],text_trans=trans_text, font_size=text[2])
+
+        tb = Textbox(position=text[1],text_org=text[0],text_trans=trans_text, font_size=font_size)
         tb_list.append(tb)
 
     data = create_dict(tb_list)
