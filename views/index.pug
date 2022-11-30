@@ -32,8 +32,8 @@ block content
       #right.file-show
         .file-show-container
           img(src=blurPath, alt="").image
-          //- each paragraph in paragraphs 
-          //-   .parag(style="margin-left: " + paragraph.left + "px; margin-top: " + paragraph.top + "px; width: " + paragraph.width + "px;") #{paragraph.text}
+          each paragraph in paragraphs 
+            .parag(style=paragraph.style) #{paragraph.text_trans}
           #right-highlight.highlight 
             style(type="text/css").
               #right-highlight {

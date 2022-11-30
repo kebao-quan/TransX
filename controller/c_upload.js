@@ -4,6 +4,49 @@ const path = require('path');
 var PythonPath = path.join(rootDir, 'python', 'main.py')
 const fs = require('fs');
 
+
+function extractParagraph(context)
+{
+  let paragraphs = [];
+  for (const [key_, value_] of Object.entries(context["blocks"])) {
+    let style = "";
+    let text_org = "";
+    let text_trans = "";
+    for (const [key, value] of Object.entries(value_)) {
+        //console.log(key, value);
+        switch (key) {
+            case "margin_left":
+                style = style.concat("margin-left: ", value, "px; ");
+                break;
+            case "margin_top":
+                style = style.concat("margin-top: ", value, "px; ");
+                break;
+            case "width":
+                style = style.concat("width: ", value, "px; ");
+                break;
+            case "height":
+                style = style.concat("height: ", value, "px; ");
+                break;
+            case "text_org":
+                text_org = value;
+                break;
+            case "text_trans":
+                texst_trans = value;
+                break;
+            default:
+                break;
+        }
+    }
+    let tmp = {
+        style: style,
+        text_org: text_org,
+        text_trans: texst_trans
+    }
+    paragraphs.push(tmp)
+  }
+  return paragraphs
+}
+
 exports.postUpload = (req, res, next) => {
     console.log(req.fileName);
     imagePath = path.join(rootDir, 'upload', req.fileName);
@@ -42,12 +85,15 @@ exports.postUpload = (req, res, next) => {
             throw err;
         }
  
-        console.log(req.session.context)
+        console.log(req.session.context);
         req.session.context = JSON.parse(results[0]);
         req.session.context.originPath = '/image/original/' + req.fileName;
         req.session.context.blurPath = '/image/blured/' + req.fileName;
         req.session.context.downloadPath = downloadPath;
         req.session.context.fileName = req.fileName;
+
+        //extract paragraph
+        req.session.context.paragraphs = extractParagraph(req.session.context);
 
         console.log(req.session.context);
         res.redirect('/');
