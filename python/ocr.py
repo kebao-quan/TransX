@@ -51,36 +51,25 @@ def detect_text(path,args):
             line_space_list = []
             last_y = 0
             text = ""
-            # get test
+
             for word in paragraph.words:
                 for symbol in word.symbols:
                     end = ""
                     type_ = str(symbol.property.detected_break.type_)
                     if type_=="BreakType.SPACE" or type_=="BreakType.EOL_SURE_SPACE" or type_=="BreakType.SURE_SPACE":
                         end = " "
-
                     if type_=="BreakType.EOL_SURE_SPACE":
                         line_space_list.append(symbol.bounding_box.vertices[0].y-last_y)
                         last_y = symbol.bounding_box.vertices[0].y
-
                     text += symbol.text + end
                     font_size_list.append(symbol.bounding_box.vertices[1].x - symbol.bounding_box.vertices[0].x)
-            # get box
+                    
             vertices = ([(vertex.x, vertex.y) for vertex in paragraph.bounding_box.vertices])
             font_size = np.median(np.array(font_size_list))           
-            line_space = np.median(np.array(line_space_list)) / font_size * 0.67
+            line_space = np.median(np.array(line_space_list)) / font_size * 0.65
             if np.isnan(line_space) or line_space < 1.2 or line_space > 3:
                 line_space = 1.35
         
             rets.append([text, vertices, font_size, line_space])
 
     return rets
-        
-# image = r"C:\TranX\image_ocr\image4.png"
-
-
-# text = detect_text(image)
-
-
-# print(text[0])
-# print(text[1])
