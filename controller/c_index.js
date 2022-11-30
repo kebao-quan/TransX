@@ -4,6 +4,7 @@ const rootDir = require('../util/path');
 
 const defaultContext = {
     title: "TransX",
+    paragraphs: []
 }
 
 exports.render = (req, res, next) => {
