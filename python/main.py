@@ -56,7 +56,6 @@ def medianBlur(img, position):
         y2 = y2 + red
 
     img_tmp = img[x1:x2,y1:y2,:]
-    # plt.imsave("./test_tmp.png",img_tmp)
     img_tmp = cv2.medianBlur(img_tmp, decided_blur_strength())
     img[x1:x2,y1:y2,:] = img_tmp
     return img
@@ -64,14 +63,13 @@ def medianBlur(img, position):
 
 def main(args):
     texts = detect_text(args.imagePath,args)
-    img_blur = mpimg.imread(args.imagePath)
+    img_blur = cv2.imread(args.imagePath)
     img_blur = img_blur.copy()
     tb_list = []
 
     for text in texts:
         # trains text 
-        target = "ZH"
-        trans_text = net_translate(target, text[0])
+        trans_text = net_translate(args.target, text[0])
 
         # pic without word        
         img_blur = medianBlur(img_blur, text[1])
@@ -86,7 +84,7 @@ def main(args):
     data = create_dict(tb_list)
     jsonStr = json.dumps(data)
     print(jsonStr)
-    plt.imsave(args.blurPath,img_blur)
+    cv2.imwrite(args.blurPath,img_blur)
 
 if __name__ == '__main__':
 
@@ -96,4 +94,5 @@ if __name__ == '__main__':
     parser.add_argument('blurPath', type=str, help='image without any word')
     parser.add_argument('downloadPath', type=str, help='image with translated word')
     args = parser.parse_args()
+    args.target = "ZH"
     main(args)
