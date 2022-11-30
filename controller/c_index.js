@@ -3,10 +3,7 @@ const path = require('path');
 const rootDir = require('../util/path');
 
 const defaultContext = {
-    title: "TranX1",
-    paragraphs: [{text: "aaaaaaaaaa", left: 20, top: 30}    ,
-                 {text: "bbbbbbbbbb", left: 30, top: 40},
-                 {text: "cccccccccc", left: 100, top: 100}]
+    title: "TransX",
 }
 
 exports.render = (req, res, next) => {
