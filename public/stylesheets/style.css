@@ -16,8 +16,8 @@ body {
 
 .file-show
 {
-  width: 600px;
-  height: 400px;
+  width: 50%;
+  height: 1000px;
   overflow: auto;
   display: flex;
   background-color: darkblue;
