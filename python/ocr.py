@@ -68,7 +68,7 @@ def detect_text(path,args):
             # get box
             vertices = ([(vertex.x, vertex.y) for vertex in paragraph.bounding_box.vertices])
             font_size = np.median(np.array(font_size_list))           
-            line_space = np.median(np.array(line_space_list)) / font_size * 0.75
+            line_space = np.median(np.array(line_space_list)) / font_size * 0.67
             if np.isnan(line_space) or line_space < 1.2 or line_space > 3:
                 line_space = 1.35
         
