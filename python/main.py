@@ -77,9 +77,9 @@ def main(args):
         # pic without word        
         img_blur = medianBlur(img_blur, text[1])
 
-        # fount size TODO
-
         # pic with word TODO
+
+        
         tb = Textbox(position=text[1],text_org=text[0],text_trans=trans_text, font_size=text[2])
         tb_list.append(tb)
 
