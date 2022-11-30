@@ -16,8 +16,8 @@ class Textbox(object):
 
         self.margin_left = min(x1, x2)
         self.margin_top = min(y1, y2)
-        self.width = abs(x1-x2)
-        self.height = abs(y1-y2)
+        self.width = abs(y1-y2)
+        self.height = abs(x1-x2)
         self.text_org = text_org
         self.text_trans = text_trans
 
