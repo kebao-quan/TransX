@@ -1,14 +1,14 @@
-var express = require('express');
-var router = express.Router();
-const indexController = require('../controller/c_index');
+// var express = require('express');
+// var router = express.Router();
+// const indexController = require('../controller/c_index');
 
 
 
 
 
-router.get('/:filename', indexController.downloadFile)
+// router.get('/:filename', indexController.downloadFile)
 
 
 
 
-exports.router = router;
+// exports.router = router;

@@ -15,39 +15,43 @@ block content
       input(type="submit" value="upload")
     .show
       #left.file-show 
-        .file-show-container 
-          img.image(src=originPath, alt="")
-          #left-highlight.highlight 
-            style(type="text/css").
-              #left-highlight {
-                margin-left: 0px;
-                margin-top: 0px;
-                width: 100px;
-                height: 100px;
-              }
+        .display-inline-block
+          .file-show-container 
+            img.image(src=originPath, alt="")
+            #left-highlight.highlight 
+              style(type="text/css").
+                #left-highlight {
+                  margin-left: 0px;
+                  margin-top: 0px;
+                  width: 100px;
+                  height: 100px;
+                }
           
 
       .seperator
 
       #right.file-show
-        .file-show-container
-          img(src=blurPath, alt="").image
-          each paragraph in paragraphs 
-            .parag(style=paragraph.style) #{paragraph.text_trans}
-          #right-highlight.highlight 
-            style(type="text/css").
-              #right-highlight {
-                margin-left: 0px;
-                margin-top: 0px;
-                width: 100px;
-                height: 100px;
-              }
+        .display-inline-block
+          #right-image.file-show-container
+            img(src=blurPath, alt="").image
+            each paragraph in paragraphs 
+              .parag(style=paragraph.style) #{paragraph.text_trans}
+            #right-highlight.highlight 
+              style(type="text/css").
+                #right-highlight {
+                  margin-left: 0px;
+                  margin-top: 0px;
+                  width: 100px;
+                  height: 100px;
+                }
 
-    .download 
-      form(action='/download/' + fileName)
-        input(type="submit" value="download")
+    //- .download 
+    //-   form(action='/download/' + fileName)
+    //-     input(type="submit" value="download")
 
-
+    button#download Download
+          script.
+            $('#download').on('click', PrintDiv)
 
 
   script.
@@ -84,3 +88,4 @@ block content
       $("#left-highlight").css("opacity","0%");
       $("#right-highlight").css("opacity","0%");
     });
+

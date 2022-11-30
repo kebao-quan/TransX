@@ -10,14 +10,15 @@ body {
 {
   display: flex;
   flex-direction: row;
-
+  margin: 0;
+  padding: 0;
 }
 
 
 .file-show
 {
   width: 50%;
-  height: 1000px;
+  height: 400px;
   overflow: auto;
   display: flex;
   background-color: darkblue;
@@ -28,8 +29,11 @@ body {
 
 .file-show-container 
 {
-  margin: 5%;
-  margin-bottom: 100px;
+  margin: 0%;
+  background-color: pink;
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 0;
 }
 
 .seperator
@@ -41,7 +45,10 @@ body {
 
 .image
 {
-  position: absolute;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  width: auto;
+  height: auto;
 }
 
 .highlight
@@ -60,5 +67,13 @@ body {
 
 .parag
 {
-  position: absolute;
+  grid-row-start: 1;
+  grid-column-start: 1;
+}
+
+.display-inline-block
+{
+  margin: 5%;
+  padding: 0;
+  display: inline-block;
 }
