@@ -20,6 +20,7 @@ class Textbox(object):
         self.height = abs(x1-x2)
         self.text_org = text_org
         self.text_trans = text_trans
+        self.font_size = 16
 
 def create_dict(tb_list):
     block_dir = {}
