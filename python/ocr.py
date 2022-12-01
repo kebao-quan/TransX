@@ -58,17 +58,21 @@ def detect_text(path,args):
                     type_ = str(symbol.property.detected_break.type_)
                     if type_=="BreakType.SPACE" or type_=="BreakType.EOL_SURE_SPACE" or type_=="BreakType.SURE_SPACE":
                         end = " "
-                    if type_=="BreakType.EOL_SURE_SPACE":
+
+                    if not len(line_space_list):
+                        last_y = symbol.bounding_box.vertices[0].y
+                        
+                    if type_=="BreakType.EOL_SURE_SPACE" or type_=="BreakType.LINE_BREAK":
                         line_space_list.append(symbol.bounding_box.vertices[0].y-last_y)
                         last_y = symbol.bounding_box.vertices[0].y
                     text += symbol.text + end
                     font_size_list.append(symbol.bounding_box.vertices[1].x - symbol.bounding_box.vertices[0].x)
                     
             vertices = ([(vertex.x, vertex.y) for vertex in paragraph.bounding_box.vertices])
-            font_size = np.median(np.array(font_size_list))           
-            line_space = np.median(np.array(line_space_list)) / font_size * 0.65
-            if np.isnan(line_space) or line_space < 1.2 or line_space > 3:
-                line_space = 1.35
+            font_size = np.median(np.array(font_size_list)) 
+            line_space = np.median(np.array(line_space_list[1:])) / font_size * 0.65
+            if np.isnan(line_space) or len(line_space_list)<=1 or line_space < 1.1 or line_space > 5:
+                line_space = 1.5
         
             rets.append([text, vertices, font_size, line_space])
 
