@@ -10,7 +10,7 @@ import argparse
 
 
 class Textbox(object):
-    def __init__(self, position, text_org=None, text_trans=None, font_size=16, line_space=1.5):
+    def __init__(self, position, text_org=None, text_trans=None, font_size=16, line_space=1.5, color="#000000"):
         x1, x2 = position[0][1], position[2][1]
         y1, y2 = position[0][0], position[1][0]
 
@@ -22,6 +22,7 @@ class Textbox(object):
         self.text_trans = text_trans
         self.font_size = font_size
         self.line_space = line_space
+        self.font_color = color
 
 
 def create_dict(tb_list):
