@@ -77,3 +77,31 @@ body {
   padding: 0;
   display: inline-block;
 }
+
+#show-header
+{
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+}
+
+#show-header-left
+{
+  width: 90%;
+  height: 30px;
+  background-color: aliceblue;
+}
+
+#show-header-right
+{
+  width: 10%;
+  height: 30px;
+  background-color: antiquewhite;
+}
+
+#editable
+{
+  width: 100%;
+  height: 100%;
+}

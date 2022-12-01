@@ -13,6 +13,14 @@ block content
     form(action="/upload" method='POST' enctype="multipart/form-data") 
       input(type="file" name="image")
       input(type="submit" value="upload")
+    #show-header
+      #show-header-left
+      #show-header-right
+        button#editable Allow Edit
+          script.
+            $('#editable').on('click', editSwitch) 
+    div(style="margin-top: 10px;")     
+        
     .show
       #left.file-show 
         .display-inline-block
@@ -25,6 +33,7 @@ block content
                   margin-top: 0px;
                   width: 100px;
                   height: 100px;
+
                 }
           
 
@@ -32,7 +41,7 @@ block content
 
       #right.file-show
         .display-inline-block
-          #right-image.file-show-container
+          #right-image.file-show-container(contenteditable="false")
             img(src=blurPath, alt="").image
             each paragraph in paragraphs 
               .parag(style=paragraph.style) #{paragraph.text_trans}
@@ -55,31 +64,6 @@ block content
 
 
   script.
-    $(document).ready(function(){
-      var master = "left"; 
-      var slave = "right"; 
-      var master_tmp;
-      var slave_tmp;
-      var timer;
-      var sync = function ()
-      {
-        if($(this).attr('id') == slave)
-        {
-          master_tmp = master;
-          slave_tmp = slave;
-          master = slave;
-          slave = master_tmp;
-        }
-        $("#" + slave).unbind("scroll");
-        $("#" + slave).scrollTop(this.scrollTop);
-        $("#" + slave).scrollLeft(this.scrollLeft);
-        if(typeof(timer) !== 'undefind')
-          clearTimeout(timer);
-        timer = setTimeout(function(){ $("#" + slave).scroll(sync) }, 200)
-      }
-      $('#' + master + ', #' + slave).scroll(sync);
-    });
-
     $(".highlight").hover(function() {
       $("#left-highlight").css("opacity","50%");
       $("#right-highlight").css("opacity","50%");
