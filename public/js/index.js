@@ -15,7 +15,11 @@ function downloadURI(uri, name) {
     document.body.appendChild(link);
     link.click();   
     //after creating link you should delete dynamic link
-    //clearDynamicLink(link); 
+    clearDynamicLink(link); 
+}
+
+function clearDynamicLink(link) {
+  link.remove();
 }
 
 function editSwitch()

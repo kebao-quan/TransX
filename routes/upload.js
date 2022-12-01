@@ -11,7 +11,7 @@ const uploadController = require('../controller/c_upload')
 
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'upload');
+        cb(null, 'public/image/original');
     },
     filename: (req, file, cb) => {
         req.fileName = new Date().toISOString().replace(/[-:.]/g,"") + '-' + file.originalname;

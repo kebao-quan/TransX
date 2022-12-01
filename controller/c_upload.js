@@ -55,32 +55,32 @@ function extractParagraph(context)
 
 exports.postUpload = (req, res, next) => {
     console.log(req.fileName);
-    imagePath = path.join(rootDir, 'upload', req.fileName);
+    // imagePath = path.join(rootDir, 'public', 'image', 'original', req.fileName);
     originPath = path.join(rootDir, 'public', 'image', 'original', req.fileName);
     blurPath = path.join(rootDir, 'public', 'image', 'blured');
     blurPathFull = path.join(rootDir, 'public', 'image', 'blured', req.fileName);
     downloadPath = path.join(rootDir, 'download');
     downloadPathFull = path.join(rootDir, 'download', req.fileName);
-    fs.copyFile(imagePath, originPath, (err) => {
-        if (err) 
-        {
-            console.log(err.message)
-            throw err;
-        }
-    });
+    // fs.copyFile(imagePath, originPath, (err) => {
+    //     if (err) 
+    //     {
+    //         console.log(err.message)
+    //         throw err;
+    //     }
+    // });
 
     //redundent
-    fs.copyFile(imagePath, path.join(downloadPath, req.fileName), (err) => {
-        if (err) 
-        {
-            console.log(err.message)
-            throw err;
-        }
-    });
+    // fs.copyFile(imagePath, path.join(downloadPath, req.fileName), (err) => {
+    //     if (err) 
+    //     {
+    //         console.log(err.message)
+    //         throw err;
+    //     }
+    // });
     
     var options = {
         mode: 'text',
-        args: [rootDir, imagePath, blurPathFull, downloadPathFull]
+        args: [rootDir, originPath, blurPathFull, downloadPathFull]
     };
 
     PythonShell.run(PythonPath, options, function (err, results) {

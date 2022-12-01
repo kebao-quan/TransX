@@ -21,7 +21,7 @@ body {
   height: 400px;
   overflow: auto;
   display: flex;
-  background-color: darkblue;
+  background-color: lightcyan;
   border-radius: 2%;
   border-color: black;
   position: relative;
