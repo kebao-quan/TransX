@@ -22,8 +22,8 @@ block content
     div(style="margin-top: 10px;")     
         
     .show
-      #left.file-show 
-        .display-inline-block
+      #left.file-show.scaled-wrapper
+        .display-inline-block.scaled-content
           .file-show-container 
             img.image(src=originPath, alt="")
             #left-highlight.highlight 
@@ -39,12 +39,13 @@ block content
 
       .seperator
 
-      #right.file-show
-        .display-inline-block
+      #right.file-show.scaled-wrapper
+        .display-inline-block.scaled-content
           #right-image.file-show-container(contenteditable="false")
             img(src=blurPath, alt="").image
             each paragraph in paragraphs 
-              .parag(style=paragraph.style) #{paragraph.text_trans}
+              .parag(style=paragraph.style) 
+                p.parag-text #{paragraph.text_trans}
             #right-highlight.highlight 
               style(type="text/css").
                 #right-highlight {
@@ -62,6 +63,16 @@ block content
           script.
             $('#download').on('click', PrintDiv)
 
+    button#scale Scale
+          script.
+            $('#scale').on('click', makeScale) 
+    
+
+    if paragraphs.length != 0
+      script.
+        makeScale();
+            
+
 
   script.
     $(".highlight").hover(function() {
@@ -72,4 +83,6 @@ block content
       $("#left-highlight").css("opacity","0%");
       $("#right-highlight").css("opacity","0%");
     });
+
+
 

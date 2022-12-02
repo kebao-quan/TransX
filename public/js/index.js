@@ -58,3 +58,41 @@ $(document).ready(function(){
     $('#' + master + ', #' + slave).scroll(sync);
   });
 
+
+
+
+  //scale
+  
+
+  let applyScaling = (scaledWrapper, scaledWrapper2) => {
+    
+    // Get the scaled content, and reset its scaling for an instant
+    let scaledContent = scaledWrapper.getElementsByClassName('scaled-content')[0];
+    let scaledContent2 = scaledWrapper2.getElementsByClassName('scaled-content')[0];
+    scaledContent.style.transform = 'scale(1, 1)';
+    
+    let { width: cw, height: ch } = scaledContent.getBoundingClientRect();
+    let { width: ww, height: wh } = scaledWrapper.getBoundingClientRect();
+    
+    let scaleAmtX = ww / cw;
+    //let scaleAmtY = wh / ch;
+    
+    scaledWrapper.style.overflowX = "hidden";
+    scaledWrapper.style.overflowY = "auto";
+
+    scaledWrapper2.style.overflowX = "hidden";
+    scaledWrapper2.style.overflowY = "auto";
+    //scaledContent.style.transformOrigin = 'left';
+    scaledContent.style.transform = `scale(${scaleAmtX}, ${scaleAmtX})`;
+    scaledContent2.style.transform = `scale(${scaleAmtX}, ${scaleAmtX})`;
+    // scaledWrapper.style.width = scaledContent.offsetWidth*scaleAmtX*2;
+    // scaledWrapper.style.overflow = "hidden";      
+  };
+  
+  function makeScale()
+  {
+    let scaledWrapper = document.getElementsByClassName('scaled-wrapper')[0];
+    scaledWrapper2 = document.getElementsByClassName('scaled-wrapper')[1];
+    applyScaling(scaledWrapper, scaledWrapper2);
+  }
+
