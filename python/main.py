@@ -96,8 +96,11 @@ def main(args):
 
         # font_size = 
         font_size = text[2]
-        font_size = font_size * 1.70
 
+        if args.target == "ZH":
+            font_size = font_size * 1.70
+        else:
+            font_size = font_size * 1.5
         # pic with word TODO
 
         tb = Textbox(position=text[1],text_org=text[0],text_trans=trans_text, font_size=font_size, line_space=text[3])
