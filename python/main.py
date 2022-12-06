@@ -80,7 +80,7 @@ def main(args):
 
         # font_size = 
         font_size = text[2]
-        font_size = font_size * 1.5
+        font_size = font_size * 1.75
 
         # pic with word TODO
 
