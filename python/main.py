@@ -113,7 +113,7 @@ def main(args):
     
 
     # del image
-    del_image([args.blurPath, args.imagePath])
+    # del_image([args.blurPath, args.imagePath])
 
 if __name__ == '__main__':
 
