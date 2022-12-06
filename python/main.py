@@ -52,7 +52,7 @@ def blur_strength():
 
 # @async
 def del_image(imgs_path):
-    sleep(10)
+    sleep(60)
     for img in imgs_path:
         os.remove(img)
 
