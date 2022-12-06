@@ -4,6 +4,7 @@ from translate_func import deepl_translate as net_translate
 import cv2
 # import matplotlib.pyplot as plt
 # import matplotlib.image as mpimg
+import os
 import sys
 import json
 import argparse
