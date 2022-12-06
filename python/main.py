@@ -7,6 +7,7 @@ import cv2
 import sys
 import json
 import argparse
+from threading import Thread
 
 
 class Textbox(object):
@@ -40,6 +41,19 @@ def create_dict(tb_list):
 #TODO
 def blur_strength():
     return 53
+
+def async(f):
+    def wrapper(*args, **kwargs):
+        thr = Thread(target=f, args=args, kwargs=kwargs)
+        thr.start()
+    return wrapper
+
+@async
+def del_image(imgs_path):
+    sleep(10)
+    for img in imgs_path:
+        os.remove(img)
+
 
 
 def medianBlur(img, position):
@@ -89,8 +103,12 @@ def main(args):
 
     data = create_dict(tb_list)
     jsonStr = json.dumps(data)
-    print(jsonStr)
     cv2.imwrite(args.blurPath,img_blur)
+    print(jsonStr)
+    
+
+    # del image
+    del_image([args.blurPath, args.imagePath])
 
 if __name__ == '__main__':
 
@@ -98,7 +116,7 @@ if __name__ == '__main__':
     parser.add_argument('rootDir', type=str, help='root dir')
     parser.add_argument('imagePath', type=str, help='orginal image')
     parser.add_argument('blurPath', type=str, help='image without any word')
-    parser.add_argument('downloadPath', type=str, help='image with translated word')
+    parser.add_argument('target', type=str, help='target language')
     args = parser.parse_args()
     args.target = "ZH"
     main(args)
