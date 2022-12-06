@@ -44,13 +44,13 @@ def create_dict(tb_list):
 def blur_strength():
     return 53
 
-def async(f):
-    def wrapper(*args, **kwargs):
-        thr = Thread(target=f, args=args, kwargs=kwargs)
-        thr.start()
-    return wrapper
+# def async(f):
+#     def wrapper(*args, **kwargs):
+#         thr = Thread(target=f, args=args, kwargs=kwargs)
+#         thr.start()
+#     return wrapper
 
-@async
+# @async
 def del_image(imgs_path):
     sleep(10)
     for img in imgs_path:
