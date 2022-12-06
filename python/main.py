@@ -123,5 +123,5 @@ if __name__ == '__main__':
     parser.add_argument('blurPath', type=str, help='image without any word')
     parser.add_argument('target', type=str, help='target language')
     args = parser.parse_args()
-    # args.target = "ZH"
+    args.target = "ZH"
     main(args)
