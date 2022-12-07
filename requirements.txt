@@ -1,5 +1,6 @@
 deepl
 google-cloud-translate==2.0.1
+google-cloud-vision
 opencv-python
 matplotlib
 numpy
