@@ -42,7 +42,8 @@ def create_dict(tb_list):
 
 #TODO
 def blur_strength(font_size):
-    strength = font_size * 2
+    strength = int(font_size * 2)
+
     if strength < 53:
         return 53
     else:
