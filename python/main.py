@@ -41,8 +41,12 @@ def create_dict(tb_list):
 
 
 #TODO
-def blur_strength():
-    return 53
+def blur_strength(font_size):
+    strength = font_size * 2
+    if strength < 53:
+        return 53
+    else:
+        return strength
 
 # def async(f):
 #     def wrapper(*args, **kwargs):
@@ -58,7 +62,7 @@ def del_image(imgs_path):
 
 
 
-def medianBlur(img, position):
+def medianBlur(img, position, font_size):
     x1, x2 = position[0][1], position[2][1]
     y1, y2 = position[0][0], position[1][0]
 
@@ -76,7 +80,7 @@ def medianBlur(img, position):
         y2 = y2 + red
 
     img_tmp = img[x1:x2,y1:y2,:]
-    img_tmp = cv2.medianBlur(img_tmp, blur_strength())
+    img_tmp = cv2.medianBlur(img_tmp, blur_strength(font_size))
     img[x1:x2,y1:y2,:] = img_tmp
     return img
 
@@ -91,17 +95,18 @@ def main(args):
         # trains text 
         trans_text = net_translate(args.target, text[0])
 
-        # pic without word        
-        img_blur = medianBlur(img_blur, text[1])
-
-        # font_size = 
+        # font_size
         font_size = text[2]
 
         if args.target == "ZH":
             font_size = font_size * 1.70
         else:
             font_size = font_size * 1.5
-        # pic with word TODO
+
+        # pic without word        
+        img_blur = medianBlur(img_blur, text[1], font_size)
+
+
 
         tb = Textbox(position=text[1],text_org=text[0],text_trans=trans_text, font_size=font_size, line_space=text[3])
         tb_list.append(tb)
