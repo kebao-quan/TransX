@@ -77,10 +77,12 @@ exports.postUpload = (req, res, next) => {
     //         throw err;
     //     }
     // });
-    
+    language = req.session.language;
+    console.log("language:")
+    console.log(language);
     var options = {
         mode: 'text',
-        args: [rootDir, originPath, blurPathFull, downloadPathFull]
+        args: [rootDir, originPath, blurPathFull, language]
     };
 
     PythonShell.run(PythonPath, options, function (err, results) {
@@ -101,7 +103,7 @@ exports.postUpload = (req, res, next) => {
         //extract paragraph
         req.session.context.paragraphs = extractParagraph(req.session.context);
 
-        console.log(req.session.context);
+        //console.log(req.session.context);
         res.redirect('/');
     });
 }

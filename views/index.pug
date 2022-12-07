@@ -12,9 +12,17 @@ block content
     h1 upload
     form(action="/upload" method='POST' enctype="multipart/form-data") 
       input(type="file" name="image")
-      input(type="submit" value="upload")
+      input(type="submit" value="upload", onclick="sendLanguage()")
     #show-header
       #show-header-left
+      label#languageLabel(for='language')  
+              select#language(name='language')
+                option(value='ZH') Chinese
+                option(value='FR') Franch
+                option(value='EL') Greek
+                option(value='JA') Japanese
+                option(value='RU') Russian
+                option(value='DE') German
       #show-header-right
         button#editable Allow Edit
           script.

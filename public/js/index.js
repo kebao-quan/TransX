@@ -96,3 +96,40 @@ $(document).ready(function(){
     applyScaling(scaledWrapper, scaledWrapper2);
   }
 
+
+
+//let photo = document.getElementById("").files[0];
+//let formData = new FormData();
+     
+//formData.append("photo", photo);
+//fetch('/upload/image', {method: "POST", body: formData});
+
+async function sendLanguage()
+{
+  language = getValue();
+  console.log("Fetch");
+  console.log(language)
+  const options = {
+    method: "POST",
+    headers: {
+        "Content-Type": "text/plain"
+    },
+    body: language,
+    mode: 'no-cors'
+  }
+
+  await fetch("upload/language", options)
+    .then(response => response);
+}
+
+function getValue()
+{
+  let e = document.getElementById("language");
+  let value = e.value;
+  return value;
+}
+
+function greet()
+{
+  console.log("Hi")
+}

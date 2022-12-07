@@ -33,8 +33,12 @@ const upload = multer({
     fileFilter: fileFilter
 })
 
+router.post('/language', (req, res)=>
+{
+    req.session.language = req.body;
+    res.send("success");
+})
 router.post('/', upload.single('image'), uploadController.postUpload)
-
 
 
 exports.router = router;
