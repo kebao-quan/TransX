@@ -44,9 +44,13 @@ def create_dict(tb_list):
 def blur_strength(font_size):
     strength = int(font_size * 2)
 
+
+
     if strength < 53:
         return 53
     else:
+        if strength%2 == 0:
+            strength += 1
         return strength
 
 # def async(f):
