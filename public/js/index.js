@@ -107,6 +107,10 @@ $(document).ready(function(){
 async function sendLanguage()
 {
   language = getValue();
+  if (language == undefined)
+  {
+    language = "ZH";
+  }
   console.log("Fetch");
   console.log(language)
   const options = {
