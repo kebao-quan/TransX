@@ -6,7 +6,8 @@ const multer = require('multer');
 const path = require('path');
 
 const rootDir = require('../util/path');
-const uploadController = require('../controller/c_upload')
+const uploadController = require('../controller/c_upload');
+const { nextTick } = require('process');
 
 
 const fileStorage = multer.diskStorage({
@@ -33,11 +34,11 @@ const upload = multer({
     fileFilter: fileFilter
 })
 
-router.post('/language', (req, res)=>
-{
-    req.session.language = req.body;
-    res.send("success");
-})
+// router.post('/language', (req, res)=>
+// {
+//     req.session.language = req.body;
+//     res.send("success");
+// })
 router.post('/', upload.single('image'), uploadController.postUpload)
 
 

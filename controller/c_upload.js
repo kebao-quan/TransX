@@ -77,7 +77,7 @@ exports.postUpload = (req, res, next) => {
     //         throw err;
     //     }
     // });
-    language = req.session.language;
+    language = req.body.language;
     console.log("language:")
     console.log(language);
     var options = {
