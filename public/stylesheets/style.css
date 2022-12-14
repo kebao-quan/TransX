@@ -24,7 +24,7 @@
   height: 600px;
   overflow: auto;
   display: flex;
-  border-radius: 2%;
+  border-radius: 1%;
   border-color: black;
   position: relative;
   vertical-align: auto;
