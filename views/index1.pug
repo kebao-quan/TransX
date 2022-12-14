@@ -1,0 +1,113 @@
+extends layout
+
+block content
+  header.main-header
+    .relative.bg-white
+      .flex
+        header.flex.flex-grow.px-5.py-2.border-b.border-gray-200
+          .flex-none
+            .flex.flex-grow.mt-1
+              - const myclass = ["hover:bg-gray-100"]
+              button.rounded-full.w-9.h-9.mr-2.transition-colors.duration-100(class=myclass)
+                i.mdi.mdi-menu.text-gray-500
+              a(href=' http://transx.kyoma.top/')
+                img.mt-2(src='TransX.png' width='74' height='24' alt='Logo')
+              .ml-2.my-auto.text-lg.font-medium.text-gray-500(class='py-1.5') Translate
+          .flex-grow
+          .flex-none
+            .flex
+              button.rounded-full.w-9.h-9.mt-1.mr-2(class=myclass)
+                i.mdi.mdi-apps.text-gray-500
+              button.m-1
+                img.w-9.h-9.rounded-full.border.shado.object-cover(src='http://avatars0.githubusercontent.com/u/17010054?v=4?v=4' alt='Avatar')
+                i
+      - const Myclass=["before:content-['']", "before:bg-gray-50", "before:h-24", "before:w-full", "before:absolute", "before:border-b", "before:border-gray-200"]
+      div(class=Myclass)
+        .container.mx-auto.px-0(class='lg:px-24')
+          .flex
+            .py-4.z-10
+              - const f=["focus:outline-none", "focus:ring-1", "focus:ring-blue-600"]
+              button.rounded.px-3.py-1.bg-blue-100.border.border-blue-200.text-base.text-blue-700.font-emibold(class=f)
+                i.mdi.mdi-translate
+                               Text
+              - const g=["focus:outline-none", "focus:ring-1", "focus:ring-blue-600"]
+              button.rounded.px-3.py-1.ml-.border.border-blue-200.text-base.text-blue-600(class=f)
+                i.mdi.mdi-file
+                               Images
+
+      
+
+  main
+    .seperator
+    #maincontent
+      form(action="/upload" method='POST' enctype="multipart/form-data") 
+        input(type="file" name="image")
+        label#languageLabel(for='language')  
+          select#language(name='language')
+            option(value='ZH') Chinese
+            option(value='EN-US') English
+            option(value='FR') Franch
+            option(value='EL') Greek
+            option(value='JA') Japanese
+            option(value='RU') Russian
+            option(value='DE') German
+        input(type="submit" id="uploadbutton" value="upload")
+      #show-header
+        #show-header-left
+
+        #show-header-right
+          button#editable Edit
+            script.
+              $('#editable').on('click', editSwitch) 
+      div(style="margin-top: 10px;")     
+          
+      .show
+        #left.file-show.scaled-wrapper(class="bg-gray-100")
+          .display-inline-block.scaled-content
+            .file-show-container 
+              img.image(src=originPath, alt="")
+
+            
+
+        .seperator
+
+        #right.file-show.scaled-wrapper(class="bg-gray-100")
+          .display-inline-block.scaled-content
+            #right-image.file-show-container(contenteditable="false")
+              img(src=blurPath, alt="").image
+              each paragraph in paragraphs 
+                .parag(style=paragraph.style) 
+                  p.parag-text #{paragraph.text_trans}
+
+
+      //- .download 
+      //-   form(action='/download/' + fileName)
+      //-     input(type="submit" value="download")
+
+      button#download Download
+            script.
+              $('#download').on('click', PrintDiv)
+
+      button#scale Scale
+            script.
+              $('#scale').on('click', makeScale) 
+      
+
+      //- if paragraphs.length != 0
+      //-   script.
+      //-     makeScale();
+            
+
+
+  //- script.
+  //-   $(".highlight").hover(function() {
+  //-     $("#left-highlight").css("opacity","50%");
+  //-     $("#right-highlight").css("opacity","50%");
+  //-   },
+  //-   function() {
+  //-     $("#left-highlight").css("opacity","0%");
+  //-     $("#right-highlight").css("opacity","0%");
+  //-   });
+
+
+

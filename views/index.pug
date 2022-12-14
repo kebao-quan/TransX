@@ -1,97 +1,97 @@
-extends layout
+//- extends layout
 
-block content
-  header.main-header
-    nav.main-header__nav
+//- block content
+//-   header.main-header
+//-     nav.main-header__nav
 
       
 
-  main
-    h1 This is main page of TransX
-    h1 upload
-    form(action="/upload" method='POST' enctype="multipart/form-data") 
-      input(type="file" name="image")
-      label#languageLabel(for='language')  
-              select#language(name='language')
-                option(value='ZH') Chinese
-                option(value='EN-US') English
-                option(value='FR') Franch
-                option(value='EL') Greek
-                option(value='JA') Japanese
-                option(value='RU') Russian
-                option(value='DE') German
-      input(type="submit" value="upload")
-    #show-header
-      #show-header-left
+//-   main
+//-     h1 This is main page of TransX
+//-     h1 upload
+//-     form(action="/upload" method='POST' enctype="multipart/form-data") 
+//-       input(type="file" name="image")
+//-       label#languageLabel(for='language')  
+//-               select#language(name='language')
+//-                 option(value='ZH') Chinese
+//-                 option(value='EN-US') English
+//-                 option(value='FR') Franch
+//-                 option(value='EL') Greek
+//-                 option(value='JA') Japanese
+//-                 option(value='RU') Russian
+//-                 option(value='DE') German
+//-       input(type="submit" value="upload")
+//-     #show-header
+//-       #show-header-left
 
-      #show-header-right
-        button#editable Allow Edit
-          script.
-            $('#editable').on('click', editSwitch) 
-    div(style="margin-top: 10px;")     
+//-       #show-header-right
+//-         button#editable Allow Edit
+//-           script.
+//-             $('#editable').on('click', editSwitch) 
+//-     div(style="margin-top: 10px;")     
         
-    .show
-      #left.file-show.scaled-wrapper
-        .display-inline-block.scaled-content
-          .file-show-container 
-            img.image(src=originPath, alt="")
-            #left-highlight.highlight 
-              style(type="text/css").
-                #left-highlight {
-                  margin-left: 0px;
-                  margin-top: 0px;
-                  width: 100px;
-                  height: 100px;
+//-     .show
+//-       #left.file-show.scaled-wrapper
+//-         .display-inline-block.scaled-content
+//-           .file-show-container 
+//-             img.image(src=originPath, alt="")
+//-             #left-highlight.highlight 
+//-               style(type="text/css").
+//-                 #left-highlight {
+//-                   margin-left: 0px;
+//-                   margin-top: 0px;
+//-                   width: 100px;
+//-                   height: 100px;
 
-                }
+//-                 }
           
 
-      .seperator
+//-       .seperator
 
-      #right.file-show.scaled-wrapper
-        .display-inline-block.scaled-content
-          #right-image.file-show-container(contenteditable="false")
-            img(src=blurPath, alt="").image
-            each paragraph in paragraphs 
-              .parag(style=paragraph.style) 
-                p.parag-text #{paragraph.text_trans}
-            #right-highlight.highlight 
-              style(type="text/css").
-                #right-highlight {
-                  margin-left: 0px;
-                  margin-top: 0px;
-                  width: 100px;
-                  height: 100px;
-                }
+//-       #right.file-show.scaled-wrapper
+//-         .display-inline-block.scaled-content
+//-           #right-image.file-show-container(contenteditable="false")
+//-             img(src=blurPath, alt="").image
+//-             each paragraph in paragraphs 
+//-               .parag(style=paragraph.style) 
+//-                 p.parag-text #{paragraph.text_trans}
+//-             #right-highlight.highlight 
+//-               style(type="text/css").
+//-                 #right-highlight {
+//-                   margin-left: 0px;
+//-                   margin-top: 0px;
+//-                   width: 100px;
+//-                   height: 100px;
+//-                 }
 
-    //- .download 
-    //-   form(action='/download/' + fileName)
-    //-     input(type="submit" value="download")
+//-     //- .download 
+//-     //-   form(action='/download/' + fileName)
+//-     //-     input(type="submit" value="download")
 
-    button#download Download
-          script.
-            $('#download').on('click', PrintDiv)
+//-     button#download Download
+//-           script.
+//-             $('#download').on('click', PrintDiv)
 
-    button#scale Scale
-          script.
-            $('#scale').on('click', makeScale) 
+//-     button#scale Scale
+//-           script.
+//-             $('#scale').on('click', makeScale) 
     
 
-    if paragraphs.length != 0
-      script.
-        makeScale();
+//-     //- if paragraphs.length != 0
+//-     //-   script.
+//-     //-     makeScale();
             
 
 
-  //- script.
-  //-   $(".highlight").hover(function() {
-  //-     $("#left-highlight").css("opacity","50%");
-  //-     $("#right-highlight").css("opacity","50%");
-  //-   },
-  //-   function() {
-  //-     $("#left-highlight").css("opacity","0%");
-  //-     $("#right-highlight").css("opacity","0%");
-  //-   });
+//-   //- script.
+//-   //-   $(".highlight").hover(function() {
+//-   //-     $("#left-highlight").css("opacity","50%");
+//-   //-     $("#right-highlight").css("opacity","50%");
+//-   //-   },
+//-   //-   function() {
+//-   //-     $("#left-highlight").css("opacity","0%");
+//-   //-     $("#right-highlight").css("opacity","0%");
+//-   //-   });
 
 
 

@@ -1,9 +1,8 @@
-
 function PrintDiv()
 {
     html2canvas($('#right-image')[0]).then(canvas => {
         var myImage = canvas.toDataURL();
-        downloadURI(myImage, "MaSimulation.png");
+        downloadURI(myImage, "Translated.png");
     });
 }
 
@@ -71,19 +70,19 @@ $(document).ready(function(){
     let scaledContent2 = scaledWrapper2.getElementsByClassName('scaled-content')[0];
     scaledContent.style.transform = 'scale(1, 1)';
     
-    let { width: cw, height: ch } = scaledContent.getBoundingClientRect();
-    let { width: ww, height: wh } = scaledWrapper.getBoundingClientRect();
+    let { width: cw, height: ch } = scaledContent2.getBoundingClientRect();
+    let { width: ww, height: wh } = scaledWrapper2.getBoundingClientRect();
     
     let scaleAmtX = ww / cw;
     //let scaleAmtY = wh / ch;
     
-    scaledWrapper.style.overflowX = "hidden";
-    scaledWrapper.style.overflowY = "auto";
+    // scaledWrapper.style.overflowX = "hidden";
+    // scaledWrapper.style.overflowY = "auto";
 
     scaledWrapper2.style.overflowX = "hidden";
     scaledWrapper2.style.overflowY = "auto";
     //scaledContent.style.transformOrigin = 'left';
-    scaledContent.style.transform = `scale(${scaleAmtX}, ${scaleAmtX})`;
+    //scaledContent.style.transform = `scale(${scaleAmtX}, ${scaleAmtX})`;
     scaledContent2.style.transform = `scale(${scaleAmtX}, ${scaleAmtX})`;
     // scaledWrapper.style.width = scaledContent.offsetWidth*scaleAmtX*2;
     // scaledWrapper.style.overflow = "hidden";      
@@ -92,11 +91,16 @@ $(document).ready(function(){
   function makeScale()
   {
     let scaledWrapper = document.getElementsByClassName('scaled-wrapper')[0];
-    scaledWrapper2 = document.getElementsByClassName('scaled-wrapper')[1];
+    let scaledWrapper2 = document.getElementsByClassName('scaled-wrapper')[1];
     applyScaling(scaledWrapper, scaledWrapper2);
   }
 
-
+ function makeScale2()
+ {
+  let scaledWrapper = document.getElementsByClassName('scaled-wrapper')[0];
+  let scaledWrapper2 = document.getElementsByClassName('scaled-wrapper')[1];
+  scaledWrapper.style
+ }
 
 //let photo = document.getElementById("").files[0];
 //let formData = new FormData();
@@ -104,36 +108,31 @@ $(document).ready(function(){
 //formData.append("photo", photo);
 //fetch('/upload/image', {method: "POST", body: formData});
 
-async function sendLanguage()
-{
-  language = getValue();
-  if (language == undefined)
-  {
-    language = "ZH";
-  }
-  console.log("Fetch");
-  console.log(language)
-  const options = {
-    method: "POST",
-    headers: {
-        "Content-Type": "text/plain"
-    },
-    body: language,
-    mode: 'no-cors'
-  }
+// async function sendLanguage()
+// {
+//   language = getValue();
+//   if (language == undefined)
+//   {
+//     language = "ZH";
+//   }
+//   console.log("Fetch");
+//   console.log(language)
+//   const options = {
+//     method: "POST",
+//     headers: {
+//         "Content-Type": "text/plain"
+//     },
+//     body: language,
+//     mode: 'no-cors'
+//   }
 
-  await fetch("upload/language", options)
-    .then(response => response);
-}
+//   await fetch("upload/language", options)
+//     .then(response => response);
+// }
 
 function getValue()
 {
   let e = document.getElementById("language");
   let value = e.value;
   return value;
-}
-
-function greet()
-{
-  console.log("Hi")
 }

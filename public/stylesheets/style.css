@@ -1,7 +1,10 @@
-body {
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+
+#maincontent {
   padding: 100px;
-  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: lightgray;
 }
 
 
@@ -21,7 +24,6 @@ body {
   height: 400px;
   overflow: auto;
   display: flex;
-  background-color: lightcyan;
   border-radius: 2%;
   border-color: black;
   position: relative;
@@ -111,7 +113,54 @@ body {
   height: 100%;
 }
 
+#scale
+{
+  color: white;
+  margin-top: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  margin-left: 30px;
+  background-color: #4681f4;
+}
 
+#download
+{
+  color: white;
+  margin-top: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  background-color: #4681f4;
+}
+
+#editable
+{
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  background-color: #4681f4;
+}
+
+#uploadbutton
+{
+  margin-left: 25px;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  background-color: #4681f4;
+}
+
+#language
+{
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  background-color: #4681f4;
+}
 
 
 .parag-text
