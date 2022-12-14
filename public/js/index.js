@@ -1,9 +1,16 @@
+var scale = false
+
 function PrintDiv()
 {
+    if (scale)
+    {
+      document.getElementById('scale').click()
+    }
     html2canvas($('#right-image')[0]).then(canvas => {
-        var myImage = canvas.toDataURL();
-        downloadURI(myImage, "Translated.png");
+      var myImage = canvas.toDataURL();
+      downloadURI(myImage, "Translated.png");
     });
+
 }
 
 function downloadURI(uri, name) {
@@ -90,17 +97,18 @@ $(document).ready(function(){
   
   function makeScale()
   {
+    if (scale)
+    {
+      scale = false
+    } else {
+      scale = true
+    }
     let scaledWrapper = document.getElementsByClassName('scaled-wrapper')[0];
     let scaledWrapper2 = document.getElementsByClassName('scaled-wrapper')[1];
     applyScaling(scaledWrapper, scaledWrapper2);
   }
 
- function makeScale2()
- {
-  let scaledWrapper = document.getElementsByClassName('scaled-wrapper')[0];
-  let scaledWrapper2 = document.getElementsByClassName('scaled-wrapper')[1];
-  scaledWrapper.style
- }
+
 
 //let photo = document.getElementById("").files[0];
 //let formData = new FormData();
