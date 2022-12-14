@@ -4,12 +4,16 @@ function PrintDiv()
 {
     if (scale)
     {
-      document.getElementById('scale').click()
+      document.getElementById('scale').click();
     }
     html2canvas($('#right-image')[0]).then(canvas => {
       var myImage = canvas.toDataURL();
       downloadURI(myImage, "Translated.png");
+    }).then(()=>{
+        document.getElementById('scale').click();
     });
+    
+
 
 }
 
