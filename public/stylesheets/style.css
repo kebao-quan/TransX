@@ -21,7 +21,7 @@
 .file-show
 {
   width: 50%;
-  height: 400px;
+  height: 600px;
   overflow: auto;
   display: flex;
   border-radius: 2%;
