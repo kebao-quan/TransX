@@ -9,7 +9,7 @@ import sys
 import json
 import argparse
 from time import sleep
-from threading import Thread
+from multiprocessing import Pool
 
 
 class Textbox(object):
@@ -51,13 +51,7 @@ def blur_strength(font_size):
     #     return strength
     return 53
 
-# def async(f):
-#     def wrapper(*args, **kwargs):
-#         thr = Thread(target=f, args=args, kwargs=kwargs)
-#         thr.start()
-#     return wrapper
 
-# @async
 def del_image(imgs_path):
     sleep(60)
     for img in imgs_path:
@@ -65,7 +59,7 @@ def del_image(imgs_path):
 
 
 
-def medianBlur(img, position, font_size):
+def medianBlur(img, position, font_size=None):
     x1, x2 = position[0][1], position[2][1]
     y1, y2 = position[0][0], position[1][0]
 
@@ -87,14 +81,7 @@ def medianBlur(img, position, font_size):
     img[x1:x2,y1:y2,:] = img_tmp
     return img
 
-
-def main(args):
-    texts = detect_text(args.imagePath,args)
-    img_blur = cv2.imread(args.imagePath)
-    img_blur = img_blur.copy()
-    tb_list = []
-
-    for text in texts:
+def process_tb(text, args):
         # trains text 
         trans_text = net_translate(args.target, text[0])
 
@@ -107,12 +94,30 @@ def main(args):
             font_size = font_size * 1.5
 
         # pic without word        
-        img_blur = medianBlur(img_blur, text[1], font_size)
+        # img_blur = medianBlur(img_blur, text[1], font_size)
 
 
 
         tb = Textbox(position=text[1],text_org=text[0],text_trans=trans_text, font_size=font_size, line_space=text[3])
+        # tb_list.append(tb)
+        return tb, text[1]
+
+def main(args):
+    texts = detect_text(args.imagePath,args)
+    img_blur = cv2.imread(args.imagePath)
+    img_blur = img_blur.copy()
+    tb_list = []
+    text_poss = []
+
+    with Pool(8) as pool:
+        results = pool.starmap(process_tb, [([p0, p1, p2, p3], args) for p0, p1, p2, p3 in texts])
+
+    for tb, text_pos in results:
         tb_list.append(tb)
+        text_poss.append(text_pos)
+
+    for pos in text_poss:
+        img_blur = medianBlur(img_blur, pos)
 
     data = create_dict(tb_list)
     jsonStr = json.dumps(data)
