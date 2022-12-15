@@ -34,7 +34,7 @@
 .file-show-container 
 {
   margin: 0%;
-  background-color: pink;
+  /**background-color: pink;**/
   display: grid;
   grid-template-columns: 1fr;
   min-height: 0;
@@ -43,7 +43,7 @@
 .seperator
 {
   height: 100%;
-  background-color: pink;
+  /**background-color: pink;**/
   width: 100px;
 }
 

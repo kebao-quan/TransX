@@ -101,14 +101,17 @@ $(document).ready(function(){
   
   function makeScale()
   {
+    let scaledWrapper = document.getElementsByClassName('scaled-wrapper')[0];
+    let scaledWrapper2 = document.getElementsByClassName('scaled-wrapper')[1];
     if (scale)
     {
+      console.log("hi")
+      scaledWrapper2.style.overflowX = "auto";
+      scaledWrapper2.style.overflowY = "auto";
       scale = false
     } else {
       scale = true
     }
-    let scaledWrapper = document.getElementsByClassName('scaled-wrapper')[0];
-    let scaledWrapper2 = document.getElementsByClassName('scaled-wrapper')[1];
     applyScaling(scaledWrapper, scaledWrapper2);
   }
 
