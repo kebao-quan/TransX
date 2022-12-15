@@ -21,24 +21,22 @@ const fileStorage = multer.diskStorage({
 })
 
 const fileFilter = (req, file, cb) => {
-    if (file.mimetype === 'image/png')
+    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === "image/jpeg")
     {
         cb(null, true);
     } else {
         cb(null, false);
+        return cb(new Error("Only .png, .jpg, and .jpeg format allowed!"))
     }
 }
 
+const maxSize = 2 * 1024 * 1024
 const upload = multer({
     storage:fileStorage,
-    fileFilter: fileFilter
+    fileFilter: fileFilter,
+    limits: {fileSize: maxSize}
 })
 
-// router.post('/language', (req, res)=>
-// {
-//     req.session.language = req.body;
-//     res.send("success");
-// })
 router.post('/', upload.single('image'), uploadController.postUpload)
 
 

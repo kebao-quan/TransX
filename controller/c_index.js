@@ -14,7 +14,7 @@ exports.render = (req, res, next) => {
     {
         context = defaultContext;
     }
-    res.render('index1', context);
+    res.render('index', context);
 }
 
 // exports.downloadFile = (req, res, next) => {
