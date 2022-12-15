@@ -117,7 +117,6 @@ def main(args):
         text_poss.append(text_pos)
 
     for pos in text_poss:
-        print(pos)
         img_blur = medianBlur(img_blur, pos)
 
     data = create_dict(tb_list)
