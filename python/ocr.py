@@ -14,6 +14,7 @@ def detect_text(path,args):
     image = vision.Image(content=content)
 
     response = client.text_detection(image=image)
+
     # texts = response.text_annotations
     
     # text = texts[0]
@@ -66,15 +67,26 @@ def detect_text(path,args):
                         line_space_list.append(symbol.bounding_box.vertices[0].y-last_y)
                         last_y = symbol.bounding_box.vertices[0].y
                     text += symbol.text + end
-                    font_size_list.append(symbol.bounding_box.vertices[1].x - symbol.bounding_box.vertices[0].x)
+                    # font_size_list.append(symbol.bounding_box.vertices[1].x - symbol.bounding_box.vertices[0].x)
+                    font_size_list.append(symbol.bounding_box.vertices[2].y - symbol.bounding_box.vertices[0].y)
+                    # str_ = str(symbol.bounding_box.vertices[0].y) + " " + str(symbol.bounding_box.vertices[1].y) + " " + str(symbol.bounding_box.vertices[2].y) + " " + str(symbol.bounding_box.vertices[2].y) + "\n"
+                    # with open(os.path.join("/Users/kyoma/Desktop/","log.txt"), "a+") as f:
+                    #     f.write(str_+"\n")
                     
-            vertices = ([(vertex.x, vertex.y) for vertex in paragraph.bounding_box.vertices])
+                    
+            vertices = [(vertex.x, vertex.y) for vertex in paragraph.bounding_box.vertices]                
+
             font_size = np.median(np.array(font_size_list)) 
-            line_space = np.median(np.array(line_space_list[1:])) / font_size * 0.65
+            line_space = np.median(np.array(line_space_list[1:])) / font_size # * 0.65
+
+            if  np.isnan(line_space) or len(line_space_list)<=1:
+                one_line = True
+            else:
+                one_line = False
 
             if np.isnan(line_space) or len(line_space_list)<=1 or line_space < 1.1 or line_space > 5:
                 line_space = 1.1
         
-            rets.append([text, vertices, font_size, line_space])
+            rets.append([text, vertices, font_size, line_space, one_line])
 
     return rets
