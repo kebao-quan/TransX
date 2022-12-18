@@ -55,13 +55,6 @@ def blur_strength(font_size):
     return 53
 
 
-def del_image(imgs_path):
-    sleep(60)
-    for img in imgs_path:
-        os.remove(img)
-
-
-
 def medianBlur(img, position, font_size=None):
     x1, x2 = position[0][1], position[2][1]
     y1, y2 = position[0][0], position[1][0]
@@ -128,9 +121,6 @@ def main(args):
     cv2.imwrite(args.blurPath,img_blur)
     print(jsonStr)
     
-
-    # del image
-    # del_image([args.blurPath, args.imagePath])
 
 if __name__ == '__main__':
 
