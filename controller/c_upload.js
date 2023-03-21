@@ -54,7 +54,6 @@ function extractParagraph(context)
 }
 
 exports.postUpload = (req, res, next) => {
-    console.log(req.fileName);
     // imagePath = path.join(rootDir, 'public', 'image', 'original', req.fileName);
     originPath = path.join(rootDir, 'public', 'image', 'original', req.fileName);
     blurPath = path.join(rootDir, 'public', 'image', 'blured');
@@ -78,8 +77,6 @@ exports.postUpload = (req, res, next) => {
     //     }
     // });
     language = req.body.language;
-    console.log("language:")
-    console.log(language);
     var options = {
         mode: 'text',
         args: [rootDir, originPath, blurPathFull, language]
