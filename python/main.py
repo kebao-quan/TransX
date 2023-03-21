@@ -119,6 +119,7 @@ def main(args):
     for pos in text_poss:
         img_blur = medianBlur(img_blur, pos)
 
+
     data = create_dict(tb_list)
     jsonStr = json.dumps(data)
     cv2.imwrite(args.blurPath,img_blur)
