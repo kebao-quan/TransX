@@ -19,5 +19,5 @@ npm start
 #### Testing
 
 - Test translate API `test_translate_api.py`
-- 
+
 
